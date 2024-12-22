@@ -28,7 +28,7 @@ fi
 
 
 (
-echo o
+echo g
 echo n
 echo
 echo
