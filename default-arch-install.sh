@@ -52,10 +52,12 @@ echo
 echo w # Write changes
 ) | fdisk "$disk"
 
+partition_list=$(lsblk -ln -o NAME -r "/dev/sda" | grep -E "^$(basename "/dev/sda")" | awk '{print "/dev/" $1}')
+
 # Format partitions
-mkfs.fat -F32 "${disk}1" # Format EFI partition
-mkswap "${disk}2"        # Create swap
-swapon "${disk}2"        # Activate swap
-mkfs.ext4 "${disk}3"     # Format root partition
+mkfs.fat -F32 "${partition_list[0]}" # Format EFI partition
+mkswap "${partition_list[1]}"        # Create swap
+swapon "${partition_list[1]}"        # Activate swap
+mkfs.ext4 "${partition_list[2]}"     # Format root partition
 
 echo "Partitioning and formatting completed successfully."
