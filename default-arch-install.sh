@@ -1,23 +1,31 @@
+#!/bin/bash
+
+# Set timezone
 timedatectl set-timezone Europe/Kyiv
 
-echo "Доступные диски:"
+# Display available disks
+echo "Available disks:"
 fdisk -l | grep -E "Disk /dev/"
 
-echo -n "Введите диск для установки (например, /dev/nvme0n1): "
+
+echo -n "Enter the disk for installation (e.g., /dev/nvme0n1): "
 read disk
 
+
 if [ ! -b "$disk" ]; then
-    echo "Ошибка: Диск $disk не найден!"
+    echo "Error: Disk $disk not found!"
     exit 1
 fi
 
-echo "ВНИМАНИЕ: Все данные на $disk будут удалены!"
-echo -n "Продолжить? (y/n): "
+
+echo "WARNING: All data on $disk will be erased!"
+echo -n "Do you want to proceed? (y/n): "
 read confirm
 if [[ "$confirm" != "y" ]]; then
-    echo "Операция отменена."
+    echo "Operation canceled."
     exit 0
 fi
+
 
 (
 echo o
@@ -43,10 +51,13 @@ echo
 echo t
 echo 3
 
-echo w
+echo w # Write changes
 ) | fdisk "$disk"
 
-mkfs.fat -F32 "${disk}1" # EFI
-mkswap "${disk}2"        # SWAP
-swapon "${disk}2"        # Активировать SWAP
-mkfs.ext4 "${disk}3"     # ROOT
+# Format partitions
+mkfs.fat -F32 "${disk}1" # Format EFI partition
+mkswap "${disk}2"        # Create swap
+swapon "${disk}2"        # Activate swap
+mkfs.ext4 "${disk}3"     # Format root partition
+
+echo "Partitioning and formatting completed successfully."
