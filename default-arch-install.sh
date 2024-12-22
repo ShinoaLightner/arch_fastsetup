@@ -48,8 +48,6 @@ echo n
 echo
 echo
 echo
-echo t
-echo 3
 
 echo w # Write changes
 ) | fdisk "$disk"
