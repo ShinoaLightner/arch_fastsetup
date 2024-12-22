@@ -52,7 +52,8 @@ echo
 echo w # Write changes
 ) | fdisk "$disk"
 
-partition_list=$(lsblk -ln -o NAME -r "/dev/sda" | grep -E "^$(basename "/dev/sda")" | awk '{print "/dev/" $1}')
+partition_list=$(lsblk -ln -o NAME "$disk" | grep -E "^$(basename "$disk")" | awk '{print "/dev/" $1}')
+partition_list=("${partition_list[@]:1}")
 
 # Format partitions
 mkfs.fat -F32 "${partition_list[0]}" # Format EFI partition
