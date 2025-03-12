@@ -42,6 +42,8 @@ systemctl enable sddm
 echo "✅ Services enabled!"
 read -p "Press [Enter] to continue..."
 
-cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
-cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
-cp /usr/share/doc/polybar/examples/config.ini ~/.config/polybar/
+mkdir -p /home/$username/.config/bspwm/
+mkdir -p /home/$username/.config/sxhkd/
+mkdir -p /home/$username/.config/polybar/
+
+chown -hR ether /home/$username/.config
