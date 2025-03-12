@@ -16,7 +16,7 @@ esac
 
 
 echo "### Installing the base system..."
-pacstrap -K /mnt base linux linux-firmware networkmanager pipewire pipewire-pulse grub efibootmgr alacritty bspwm rofi polybar dunst picom sddm nano discord firefox sudo git $video_driver
+pacstrap -K /mnt base linux linux-firmware networkmanager pipewire pipewire-pulse grub efibootmgr alacritty bspwm sxhkd rofi polybar dunst picom sddm nano discord firefox sudo git $video_driver
 echo "✅ Base system installed!"
 read -p "Press [Enter] to continue..."
 

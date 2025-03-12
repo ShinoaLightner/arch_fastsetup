@@ -79,3 +79,5 @@ mkdir -p /mnt/boot       # Create boot directory if it doesn't exist
 mount "$part1" /mnt/boot # Mount EFI partition
 
 echo "✅ Partitioning and formatting completed successfully."
+
+chmod +x *.sh

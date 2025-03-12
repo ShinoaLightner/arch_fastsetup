@@ -11,7 +11,7 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
 echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+echo "LANG=en_EN.UTF-8" > /etc/locale.conf
 echo "KEYMAP=us" > /etc/vconsole.conf
 echo "✅ Locale configured!"
 read -p "Press [Enter] to continue..."
@@ -41,3 +41,7 @@ systemctl enable NetworkManager
 systemctl enable sddm
 echo "✅ Services enabled!"
 read -p "Press [Enter] to continue..."
+
+cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
+cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
+cp /usr/share/doc/polybar/examples/config.ini ~/.config/polybar/
